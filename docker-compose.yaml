@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+  nginx:
+    hostname: ecomerce
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - '8080:80'
+    environment:
+      - PHP_HOSTNAME=ecommerce-app
+      - PHP_PORT=9000
+    volumes:
+      - ./:/var/www/app:ro
+    depends_on:
+      - ecommerce
+
+  ecommerce:
+    hostname: ecommerce-app
+    container_name: ecommerce
+    build:
+      context: .
+      dockerfile: ./docker/php-fpm/Dockerfile
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./:/var/www/app
+    command: sh -c 'php-fpm'
+
+  mariadb:
+#    image: mariadb:10.3
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty123
+      MYSQL_DATABASE: ecommerce_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: qwerty123
+    ports:
+      - "3306:3306"
+    restart: on-failure

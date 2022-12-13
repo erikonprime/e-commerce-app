@@ -18,6 +18,7 @@ http://localhost:8080/
     5. ```style - only styling changes```
 
 #### e-commerce-app endpoint
-| Path | Method | Description            |
-|------|--------|------------------------|
-| /    | GET    | return default message |
+| Path             | Method | Description               |
+|------------------|--------|---------------------------|
+| /                | GET    | return default message    |
+| /api/login_check | POST   | password should be hashed |

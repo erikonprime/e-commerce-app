@@ -11,5 +11,5 @@ use Gesdinet\JWTRefreshTokenBundle\Entity\RefreshToken as BaseRefreshToken;
 #[ORM\Entity(repositoryClass: RefreshTokenRepository::class)]
 class RefreshToken extends BaseRefreshToken
 {
-    use Timestamp;
+  //  use Timestamp;
 }

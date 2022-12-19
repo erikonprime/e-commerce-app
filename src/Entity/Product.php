@@ -12,15 +12,15 @@ use Symfony\Component\Uid\Uuid;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
-    use Timestamp;
+ //   use Timestamp;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
     private int $id;
 
-    #[ORM\Column(type: 'uuid')]
-    private Uuid $uuid;
+//    #[ORM\Column(type: Types::GUID)]
+//    private string $uuid;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     private string $title;
@@ -37,21 +37,13 @@ class Product
     #[ORM\Column(type: Types::STRING, length: 128)]
     private string $slug;
 
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: false)]
+    private Category $category;
+
     public function getId(): int
     {
         return $this->id;
-    }
-
-    public function getUuid(): Uuid
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid(Uuid $uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
     }
 
     public function getTitle(): string
@@ -110,6 +102,18 @@ class Product
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getCategory(): Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

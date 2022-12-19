@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestamp;
@@ -26,11 +27,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
+    #[ORM\Column(type: Types::BOOLEAN )]
+    private bool $isActive = true;
+
     /**
      * @var string The hashed password
      */
     #[ORM\Column(type: Types::STRING, unique: true)]
     private string $password;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Address $address = null;
+
+    public function __toString()
+    {
+        return $this->email;
+    }
 
     public function getId(): ?int
     {
@@ -101,4 +113,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): self
+    {
+        // set the owning side of the relation if necessary
+        if ($address->getUser() !== $this) {
+            $address->setUser($this);
+        }
+
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool $isActive
+     */
+    public function setIsActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
+    }
+
+
 }

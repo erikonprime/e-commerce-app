@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: OrderProductRepository::class)]
 class OrderProduct
 {
-    use Timestamp;
+   // use Timestamp;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -20,6 +20,10 @@ class OrderProduct
 
     #[ORM\Column(type: Types::INTEGER)]
     private int $quantity;
+
+    #[ORM\ManyToOne(inversedBy: 'orderProducts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Order $appOrder = null;
 
     public function getId(): ?int
     {
@@ -34,6 +38,18 @@ class OrderProduct
     public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getAppOrder(): ?Order
+    {
+        return $this->appOrder;
+    }
+
+    public function setAppOrder(?Order $appOrder): self
+    {
+        $this->appOrder = $appOrder;
 
         return $this;
     }

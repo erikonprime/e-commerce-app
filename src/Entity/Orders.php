@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -25,7 +26,7 @@ class Order
     #[ORM\Column(type: Types::STRING, length: 50)]
     private string $status;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL)]
     private string $totalPrice;
 
     #[ORM\ManyToOne]
@@ -35,7 +36,7 @@ class Order
     #[ORM\OneToMany(mappedBy: 'appOrder', targetEntity: OrderProduct::class)]
     private Collection $orderProducts;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->orderProducts = new ArrayCollection();
     }

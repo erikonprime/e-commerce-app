@@ -6,20 +6,16 @@ namespace App\Entity\StaticScope;
 
 enum OrderStatus: string
 {
-    case ORDER_STATUS_CREATED = 'Created';
-    case ORDER_STATUS_PROCESSED = 'Processed';
-    case ORDER_STATUS_COMPLECTED = 'Complected';
-    case ORDER_STATUS_DELIVERED = 'Delivered';
-    case ORDER_STATUS_DENIED = 'Denied';
+    case ORDER_STATUS_CANCELED = 'canceled';
+    case ORDER_STATUS_COMPLETE = 'complete';
+    case ORDER_STATUS_on_HOLD = 'on_hold';
+    case ORDER_STATUS_PROCESSING = 'processing';
+    case ORDER_STATUS_NEW = 'new';
+    case ORDER_STATUS_PAYMENT_REVIEW = 'payment_review';
 
     public static function getOrderStatuses(): array
     {
         return [
-            self::ORDER_STATUS_CREATED,
-            self::ORDER_STATUS_PROCESSED,
-            self::ORDER_STATUS_COMPLECTED,
-            self::ORDER_STATUS_DELIVERED,
-            self::ORDER_STATUS_DENIED,
         ];
     }
 }

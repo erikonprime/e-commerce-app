@@ -3,21 +3,13 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\StaticScope\OrderStatus;
-use App\Repository\OrderRepository;
-use App\Traits\Timestamp;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\OrdersRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use JetBrains\PhpStorm\Pure;
 
-#[ORM\Entity(repositoryClass: OrderRepository::class)]
-#[ORM\Table(name: '`order`')]
-class Order
+#[ORM\Entity(repositoryClass: OrdersRepository::class)]
+class Orders
 {
-  //  use Timestamp;
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
@@ -32,14 +24,6 @@ class Order
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
-
-    #[ORM\OneToMany(mappedBy: 'appOrder', targetEntity: OrderProduct::class)]
-    private Collection $orderProducts;
-
-    #[Pure] public function __construct()
-    {
-        $this->orderProducts = new ArrayCollection();
-    }
 
     public function getId(): int
     {
@@ -78,36 +62,6 @@ class Order
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, OrderProduct>
-     */
-    public function getOrderProducts(): Collection
-    {
-        return $this->orderProducts;
-    }
-
-    public function addOrderProduct(OrderProduct $orderProduct): self
-    {
-        if (!$this->orderProducts->contains($orderProduct)) {
-            $this->orderProducts->add($orderProduct);
-            $orderProduct->setAppOrder($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrderProduct(OrderProduct $orderProduct): self
-    {
-        if ($this->orderProducts->removeElement($orderProduct)) {
-            // set the owning side to null (unless already changed)
-            if ($orderProduct->getAppOrder() === $this) {
-                $orderProduct->setAppOrder(null);
-            }
-        }
 
         return $this;
     }

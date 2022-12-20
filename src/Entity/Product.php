@@ -37,6 +37,11 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private Category $category;
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     public function getId(): int
     {
         return $this->id;

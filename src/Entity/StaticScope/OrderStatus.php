@@ -13,8 +13,15 @@ enum OrderStatus: string
     case ORDER_STATUS_NEW = 'new';
     case ORDER_STATUS_PAYMENT_REVIEW = 'payment_review';
 
-    public static function getOrderStatuses(): array
+    /**
+     * @return array<string,string>
+     */
+    public static function getAsArray(): array
     {
-        return [];
+        return array_reduce(
+            self::cases(),
+            static fn(array $choices, OrderStatus $type) => $choices + [$type->name => $type->value],
+            [],
+        );
     }
 }

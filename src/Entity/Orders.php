@@ -18,7 +18,7 @@ class Orders
     #[ORM\Column(type: Types::INTEGER)]
     private int $id;
 
-    #[ORM\Column(type: Types::STRING, length: 50, enumType: OrderStatus::class )]
+    #[ORM\Column(type: Types::STRING, length: 50)]
     private string $status;
 
     #[ORM\Column(type: Types::DECIMAL)]

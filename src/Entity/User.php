@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Repository\UserRepositoryRepository;
 use App\Traits\Timestamp;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Entity(repositoryClass: UserRepositoryRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

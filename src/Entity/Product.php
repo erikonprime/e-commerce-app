@@ -7,7 +7,6 @@ use App\Repository\ProductRepository;
 use App\Traits\Timestamp;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -19,16 +18,13 @@ class Product
     #[ORM\Column(type: Types::INTEGER)]
     private int $id;
 
-//    #[ORM\Column(type: Types::GUID)]
-//    private string $uuid;
-
     #[ORM\Column(type: Types::STRING, length: 255)]
     private string $title;
 
     #[ORM\Column(type: Types::TEXT)]
     private string $description;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[ORM\Column(type: Types::DECIMAL)]
     private string $price;
 
     #[ORM\Column(type: Types::INTEGER)]

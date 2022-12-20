@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\StaticScope\OrderStatus;
 use App\Repository\OrdersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,7 +18,7 @@ class Orders
     #[ORM\Column(type: Types::INTEGER)]
     private int $id;
 
-    #[ORM\Column(type: Types::STRING, length: 50)]
+    #[ORM\Column(type: Types::STRING, length: 50, enumType: OrderStatus::class )]
     private string $status;
 
     #[ORM\Column(type: Types::DECIMAL)]
@@ -24,6 +27,14 @@ class Orders
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\ManyToMany(targetEntity: Product::class)]
+    private Collection $orderProduct;
+
+    public function __construct()
+    {
+        $this->orderProduct = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -62,6 +73,30 @@ class Orders
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getOrderProduct(): Collection
+    {
+        return $this->orderProduct;
+    }
+
+    public function addOrderProduct(Product $orderProduct): self
+    {
+        if (!$this->orderProduct->contains($orderProduct)) {
+            $this->orderProduct->add($orderProduct);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderProduct(Product $orderProduct): self
+    {
+        $this->orderProduct->removeElement($orderProduct);
 
         return $this;
     }

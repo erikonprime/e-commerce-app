@@ -15,7 +15,6 @@ enum OrderStatus: string
 
     public static function getOrderStatuses(): array
     {
-        return [
-        ];
+        return [];
     }
 }

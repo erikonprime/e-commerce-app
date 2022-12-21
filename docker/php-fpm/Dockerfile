@@ -8,7 +8,9 @@ RUN apt install -y \
       git \
       zip \
       libzip-dev \
-      libz-dev
+      libz-dev \
+      nodejs \
+      npm
 
 RUN apt install -y \
       libicu-dev \

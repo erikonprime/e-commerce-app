@@ -9,6 +9,9 @@
 /vendor/
 .idea/
 .composer/
+.cache/
+.config/
+.local/
 ###< symfony/framework-bundle ###
 
 ###> lexik/jwt-authentication-bundle ###

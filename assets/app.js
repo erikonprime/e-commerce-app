@@ -7,6 +7,7 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+import "bootstrap/dist/css/bootstrap.min.css"
 
 // start the Stimulus application
 import './bootstrap';
@@ -21,3 +22,5 @@ createApp(App)
     .use(router)
     .use(store)
     .mount('#app')
+
+import "bootstrap/dist/js/bootstrap.js"

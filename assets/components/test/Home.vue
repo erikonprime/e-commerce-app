@@ -1,7 +1,5 @@
 <template>
-  <div>
-    Home controller
-  </div>
+12345
 </template>
 
 <script>

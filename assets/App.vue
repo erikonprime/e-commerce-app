@@ -1,9 +1,13 @@
 <template>
   <HeaderSection/>
-  <HeroSection/>
-  <AboutSection/>
-  <NewsletterSection/>
+<!--  <MainSection/>-->
+<!--  <HeroSection/>-->
+<!--  <AboutSection/>-->
+<!--  <ProductSection/>-->
+<!--  <NewsletterSection/>-->
+  <router-view> </router-view >
   <FooterSection/>
+<!--  <router-view> </router-view >-->
 </template>
 
 <script>
@@ -13,6 +17,8 @@ import HeaderSection from "./components/HeaderSection";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
 import NewsletterSection from "./components/NewsletterSection";
+import ProductSection from "./components/ProductSection";
+import MainSection from "./components/MainSection.vue";
 
 export default {
   name: "App",
@@ -21,7 +27,9 @@ export default {
     FooterSection,
     HeroSection,
     AboutSection,
-    NewsletterSection
+    NewsletterSection,
+    ProductSection,
+    MainSection
   },
   mounted() {
     const recaptchaScript = document.createElement("script");

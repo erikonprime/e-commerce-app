@@ -14,14 +14,14 @@
               <ion-icon name="location-sharp" aria-hidden="true"></ion-icon>
 
               <address class="address">
-                Woodex, Chicago, USA 2022
+                Riga, Latvia, LV 2022
               </address>
             </li>
 
             <li class="footer-list-item">
               <ion-icon name="call-sharp" aria-hidden="true"></ion-icon>
 
-              <a href="tel:+1234567890" class="footer-link">+1234567890</a>
+              <a href="tel:+1234567890" class="footer-link">+371 5555555</a>
             </li>
 
             <li>

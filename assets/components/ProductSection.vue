@@ -40,11 +40,11 @@
 
               <ul class="card-action-list">
 
-                <li>
-                  <button class="card-action-btn" aria-label="add to cart" title="add to cart">
-                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                  </button>
-                </li>
+<!--                <li>-->
+<!--                  <button class="card-action-btn" aria-label="add to cart" title="add to cart">-->
+<!--                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>-->
+<!--                  </button>-->
+<!--                </li>-->
 
                 <li>
                   <button class="card-action-btn" aria-label="add to cart" title="add to cart">
